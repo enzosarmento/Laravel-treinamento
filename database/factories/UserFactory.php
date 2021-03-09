@@ -3,6 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
+use App\Post;
+use App\Tag;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -26,3 +28,17 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(Post::class, function (Faker $faker) {
+    return [
+        'title' => $faker->sentence,
+        'content' => $faker->paragraph,
+    ];
+});
+
+$factory->define(Tag::class, function (Faker $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+

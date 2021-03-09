@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    public function index($nome) {
+    public function index($nome)
+    {
 
         return view('test.index', ['nome'=> $nome]);
     }
 
-    public function notas() {
+    public function notas()
+    {
 
 
         $notas = [
