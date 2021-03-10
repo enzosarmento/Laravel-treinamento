@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostsController@index');
 
-Route::group(['prefix'=>'admin'], function() {
+Route::get('/auth', function() {
+
+    if(Auth::attempt(['email'=>'enzosarmento91@gmail.com', 'password'=>123456])) {
+
+        return 'Olá';
+
+    } else {
+
+        return 'Falhou';
+    };
+
+});
+
+Route::get('/auth/logout', function() {
+    Auth::logout();
+});
+
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function() {
 
     Route::group(['prefix'=>'posts'], function() {
         Route::get('', ['as'=> 'admin.posts.index', 'uses'=>'PostsAdminController@index']);

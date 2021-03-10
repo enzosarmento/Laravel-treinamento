@@ -19,6 +19,10 @@
 
         @include('admin.posts._form')
 
+        <div class="form-group">
+            {{ Form::label('tags', 'Tags:', ['class' => 'control-label']) }}
+            {{ Form::textarea('tags', $post->tagList, ['class'=> 'form-control']) }}
+        </div>
 
         <div class="form-group">
             {{ Form::submit('Save', ['class'=>'btn btn-primary']) }}

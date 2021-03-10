@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Support\Facades\DB;
+use App\Tag;
 
 class PostsAdminController extends Controller
 {
@@ -33,7 +34,9 @@ class PostsAdminController extends Controller
 
     public function store(PostRequest $request)
     {
-       $this->post->create($request->all());
+
+       $post = $this->post->create($request->all());
+       $post->tags()->sync($this->getTagsIds($request->tags));
 
        return redirect()->route('admin.posts.index');
     }
@@ -47,6 +50,8 @@ class PostsAdminController extends Controller
     public function update($id, PostRequest $request)
     {
         $this->post->find($id)->update($request->all());
+        $post = $this->post->find($id);
+        $post->tags()->sync($this->getTagsIds($request->tags));
 
         return redirect()->route('admin.posts.index');
     }
@@ -57,5 +62,17 @@ class PostsAdminController extends Controller
         $this->post->find($id)->delete();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         return redirect()->route('admin.posts.index');
+    }
+
+    private function getTagsIds($tags)
+    {
+        $tagList = array_filter(array_map('trim', explode(',', $tags)));
+        $tagIDs = [];
+        foreach($tagList as $tagName)
+        {
+            $tagIDs[] = Tag::firstOrCreate(['name' => $tagName])->id;
+        }
+
+        return $tagIDs;
     }
 }
