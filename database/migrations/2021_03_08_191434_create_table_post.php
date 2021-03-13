@@ -19,6 +19,7 @@ class CreateTablePost extends Migration
             $table->text('content');
             $table->timestamps();
         });
+
     }
 
     /**

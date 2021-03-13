@@ -4,7 +4,7 @@
     <h1>Blog</h1>
 
     @foreach($posts as $post)
-        <h2>{{ $post->title }} <i>({{ $post->created_at }})</i></h2>
+        <h2>{{ $post->title }} <i>({{ $post->created_at_format }})</i></h2>
         <p>{{ $post->content }}</p>
         <b>Tags:</b><br>
         <ul>
@@ -16,9 +16,8 @@
         <h3>Comments</h3>
         @foreach($post->comments as $comment)
 
-            <b>Name: </b> {{ $comment->name }}
-            <br>
-            <b>Comment: </b> {{ $comment->comment }}
+            <b>Name: </b>  {{ $comment->name }}
+            <b>Comment: </b>  {{ $comment->comment }}
             <hr>
 
         @endforeach

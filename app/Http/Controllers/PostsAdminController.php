@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
-use App\Post;
+use App\Models\Post;
 use Illuminate\Support\Facades\DB;
-use App\Tag;
+use App\Models\Tag;
 
 class PostsAdminController extends Controller
 {
