@@ -15,26 +15,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'PostsController@index');
+Route::get('/', ['as'=> 'blog.index', 'uses' =>'PostsController@index']);
 
-Route::get('/auth', function() {
 
-    if(Auth::attempt(['email'=>'enzosarmento91@gmail.com', 'password'=>123456])) {
-
-        return 'Olá';
-
-    } else {
-
-        return 'Falhou';
-    };
-
-});
-
-Route::get('/auth/logout', function() {
-    Auth::logout();
-});
-
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function() {
+Route::group(['prefix'=>'admin'], function() {
 
     Route::group(['prefix'=>'posts'], function() {
         Route::get('', ['as'=> 'admin.posts.index', 'uses'=>'PostsAdminController@index']);

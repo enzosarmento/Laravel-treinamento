@@ -29,6 +29,7 @@ class Post extends Model
 
     public function getCreatedAtFormatAttribute()
     {
-        return $this->created_at->format('d/m/y');
+        setlocale(LC_TIME, "pt_BR");
+        return $this->updated_at->format('M, d/Y');
     }
 }

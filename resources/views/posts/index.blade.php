@@ -1,10 +1,11 @@
 @extends('template')
 
 @section('content')
+    <br>
     <h1>Blog</h1>
-
     @foreach($posts as $post)
-        <h2>{{ $post->title }} <i>({{ $post->created_at_format }})</i></h2>
+        <h2>{{ $post->title }} </h2>
+        <i>Updated at {{ $post->created_at_format }}</i>
         <p>{{ $post->content }}</p>
         <b>Tags:</b><br>
         <ul>
@@ -13,7 +14,7 @@
             @endforeach
         </ul>
 
-        <h3>Comments</h3>
+        <h4>Comments</h4>
         @foreach($post->comments as $comment)
 
             <b>Name: </b>  {{ $comment->name }}

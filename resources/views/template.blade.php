@@ -11,8 +11,22 @@
 </head>
 
 <body>
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Laravel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="{{ route('blog.index') }}">Home</a>
+            <a class="nav-item nav-link active" href="{{ route('admin.posts.index') }}">Admin</a>
 
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+        <br><br>
         @yield('content')
 
     </div>
