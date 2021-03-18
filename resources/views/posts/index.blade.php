@@ -6,7 +6,7 @@
     @foreach($posts as $post)
         <h2>{{ $post->title }} </h2>
         <i>Updated at {{ $post->created_at_format }}</i>
-        <p>{{ $post->content }}</p>
+        <p>{{ Str::limit($post->content ?? '', 300, '...') }}</p>
         <b>Tags:</b><br>
         <ul>
             @foreach($post->tags as $tag)
@@ -23,5 +23,7 @@
 
         @endforeach
     @endforeach
+
+        {{ $posts->render()}}
 
 @endsection
