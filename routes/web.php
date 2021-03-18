@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostsAdminController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -15,18 +17,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', ['as'=> 'blog.index', 'uses' =>'PostsController@index']);
+Route::get('/', [PostsController::class, 'index'])->name('blog.index');
 
 
 Route::group(['prefix'=>'admin'], function() {
 
     Route::group(['prefix'=>'posts'], function() {
-        Route::get('', ['as'=> 'admin.posts.index', 'uses'=>'PostsAdminController@index']);
-        Route::get('create', ['as'=> 'admin.posts.create', 'uses'=>'PostsAdminController@create']);
-        Route::post('store', ['as'=> 'admin.posts.store', 'uses'=>'PostsAdminController@store']);
-        Route::get('edit/{id}', ['as'=> 'admin.posts.edit', 'uses'=>'PostsAdminController@edit']);
-        Route::put('update/{id}', ['as'=> 'admin.posts.update', 'uses'=>'PostsAdminController@update']);
-        Route::get('destroy/{id}', ['as'=> 'admin.posts.destroy', 'uses'=>'PostsAdminController@destroy']);
+        Route::get('', [PostsAdminController::class, 'index'])->name('admin.posts.index');
+        Route::get('create', [PostsAdminController::class, 'create'])->name('admin.posts.create');
+        Route::post('store', [PostsAdminController::class, 'store'])->name('admin.posts.store');
+        Route::get('edit/{id}', [PostsAdminController::class, 'edit'])->name('admin.posts.edit');
+        Route::put('update/{id}', [PostsAdminController::class, 'update'])->name('admin.posts.update');
+        Route::get('destroy/{id}', [PostsAdminController::class, 'destroy'])->name('admin.posts.destroy');
     });
 
 });
